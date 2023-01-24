@@ -31,6 +31,8 @@ export default function Footer() {
                     <XMarkIcon className="w-6 bg-red-700"/>
                 </div>
 
+                <p className="text-center text-slate-700">My settings</p>
+
             </div>}
 
             {contact && <div className="w-[50%] settings">
