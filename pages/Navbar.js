@@ -69,7 +69,7 @@ export default function Navbar() {
                         <Image className="w-8" src={movieIcon} alt="Icon"/>
                         <MagnifyingGlassIcon onClick={()=>setSearchBar(!searchBar)} className="w-8 ml-9 cursor-pointer"/>
                     </div>
-                    {searchBar && <input className="fixed py-1.5 shadow-lg ml-9 text-center" type="text"
+                    {searchBar && <input className="fixed py-1.5 border border-zinc-300 shadow-lg ml-9 text-center" type="search"
                                          placeholder="Search by Title"/>}
                     <ul className="hidden md:flex">
 
@@ -113,7 +113,6 @@ export default function Navbar() {
                    ariaHideApp={false}
                    onRequestClose={() => setLoginModal(false)}
                    style={{
-
                        content: {
                            width: "21rem",
                            top: '50%',

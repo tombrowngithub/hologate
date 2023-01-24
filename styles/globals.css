@@ -10,6 +10,24 @@ body {
 
 }
 
+.search{
+    padding: 10px;
+    font-size: 20px;
+}
+
+.list{
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.listItem{
+    margin: 20px;
+    font-size: 25px;
+    color: #444;
+    font-weight: 300;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 425px) {
     .my-body{
         display: flex;
@@ -62,6 +80,15 @@ body {
         display: flex;
         align-items: center;
         justify-content: space-evenly;
+    }
+
+    .settings{
+        position: fixed;
+        height: 50%;
+        bottom: 0;
+        top: 50%;
+        background: #f6f6f6;
+        box-shadow: 0 0 20px 1px #262626;
     }
 
 }

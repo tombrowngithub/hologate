@@ -3,6 +3,7 @@ import {Inter} from '@next/font/google'
 import HomePage from "@/pages/HomePage";
 import Navbar from "@/pages/Navbar";
 import Footer from "@/pages/Footer";
+import Link from "next/link";
 
 const inter = Inter({subsets: ['latin']})
 
