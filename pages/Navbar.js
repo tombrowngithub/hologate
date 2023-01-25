@@ -63,11 +63,11 @@ export default function Navbar() {
             <div className="px-2 flex justify-between items-center w-full h-full">
                 <div className="flex items-center">
                     <div className="flex">
-                        <h1 className="text-2xl font-bold mr-4 sm:text-4xl">
-                            Holo Gate Movie
+                        <h1 className="text-2xl font-bold mr-4 sm:text-4xl flex Main-Text">
+                            HaloGate Movies
+                            <Image className="w-8" src={movieIcon} alt="Icon"/>
                         </h1>
-                        <Image className="w-8" src={movieIcon} alt="Icon"/>
-                        <MagnifyingGlassIcon onClick={()=>setSearchBar(!searchBar)} className="w-8 ml-9 cursor-pointer"/>
+                        <MagnifyingGlassIcon onClick={()=>setSearchBar(!searchBar)} className="w-7 ml-9 cursor-pointer"/>
                     </div>
                     {searchBar && <input className="fixed py-1.5 border border-zinc-300 shadow-lg ml-9 text-center" type="search"
                                          placeholder="Search by Title"/>}
@@ -93,16 +93,16 @@ export default function Navbar() {
 
 
             <ul className={!nav ? "hidden" : "absolute bg-white w-full px-8"}>
-                <li className="text-center border-2 border-zinc-100 w-full cursor-pointer p-3 mb-1"><Link
+                <li className="text-center rounded border-2 border-zinc-100 w-full cursor-pointer p-3 mb-1"><Link
                     onClick={handleClose}
                     href="support">Support</Link>
                 </li>
 
                 <div className="flex flex-col my-4">
                     <button onClick={LoginModal}
-                            className="mt-2 bg-blue-800 cursor-pointer text-white px-8 py-3 mb-4">Login
+                            className="rounded mt-2 bg-blue-800 cursor-pointer text-white px-8 py-3 mb-4">Login
                     </button>
-                    <button onClick={RegModal} className="bg-blue-800 px-8 py-3 cursor-pointer text-white">Sign Up
+                    <button onClick={RegModal} className="rounded bg-blue-800 px-8 py-3 cursor-pointer text-white">Sign Up
                     </button>
                 </div>
             </ul>
