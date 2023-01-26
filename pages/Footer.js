@@ -11,7 +11,6 @@ import Model from "react-modal";
 import {
     FaFacebook,
     FaTwitter,
-    FaPhone,
     FaWhatsapp,
     FaMailBulk
 } from "react-icons/fa";
