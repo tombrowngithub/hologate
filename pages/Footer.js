@@ -38,18 +38,19 @@ export default function Footer() {
     }
 
     function Info() {
-        setSettings(!settings)
+        setInfo(!info)
     }
 
     return (
         <>
             {settings && <div className="w-[50%] settings">
-                <div onClick={Settings} className=" flex justify-end">
+                <div onClick={Settings} className="bg-white flex justify-end">
+                    <p className="mx-10 text-xl font-bold text-slate-700">Settings</p>
                     <XMarkIcon className="w-6 bg-red-700"/>
                 </div>
-                <p className="text-center text-2xl font-bold text-slate-700">Settings</p>
-                <div className="flex flex-col items-center">
-                    <div className="flex">
+                <hr/>
+                <div className="flex flex-col items-center h-full bg-slate-300 m-0.5">
+                    <div className="flex items-center justify-start">
                         <label htmlFor="">Dark mode</label>
                         <input className="text-center w-6 bg-slate-500" type="checkbox"/>
                     </div>
@@ -126,12 +127,35 @@ export default function Footer() {
 
             </div>}
 
-            {info && <div className="w-[50%] settings">
-                <div onClick={Settings} className=" flex justify-end">
-                    <XMarkIcon className="w-6 bg-red-700"/>
-                </div>
+            <Model isOpen={info}
+                   ariaHideApp={false}
+                   onRequestClose={() => setInfo(false)}
+                   style={{
+                       content: {
+                           width: "22rem",
+                           top: '50%',
+                           left: '50%',
+                           right: 'auto',
+                           bottom: 'auto',
+                           marginRight: '-50%',
+                           transform: 'translate(-50%, -50%)',
+                           background: "#f6f6f6",
+                           boxShadow: "0 6px 12px rgba(0, 0, 0, 0.31)"
+                       }
+                   }}>
 
-            </div>}
+                <div className="flex flex-col mx-2 h-full">
+                    <h1 className="text-xl font-bold text-center">App information!</h1>
+                    <div className="bg-white text-sm font-bold mt-3 p-1">
+                        <p>Copyright&#169; 2022 <span className="mr-4 Main-Text">HaloGate Movies&#8482;</span></p>
+                        <p>All right reserved.</p>
+                        <p>Owner: Nathaniel Anuma</p>
+                        <p>Version: 1.0.0</p>
+                        <p>Developed by <Link className="text-blue-700" href="https://www.tom-portfolio.onrender.com">Tom-DevA</Link>&#8482;</p>
+                    </div>
+
+                </div>
+            </Model>
 
             <div className="w-screen h-[55px] bg-white
         shadow-lg flex justify-evenly items-center footer">
@@ -151,7 +175,7 @@ export default function Footer() {
                     <p className="text-xs text-indigo-600 active:text-white">Account</p>
                 </div>
 
-                <div className="footer-tool p-3 active:bg-indigo-100 ">
+                <div onClick={Info} className="footer-tool p-3 active:bg-indigo-100 ">
                     <InformationCircleIcon className="w-7 text-indigo-500 active:text-white"/>
                     <p className="text-xs text-indigo-600 active:text-white">Info</p>
                 </div>
