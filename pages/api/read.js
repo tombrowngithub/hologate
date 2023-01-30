@@ -1,4 +1,4 @@
-// import {Users} from '@/pages/users'
+// import {Users} from '@/pages/[users]'
 //
 // export default async function read(req, res) {
 //     const q = req.query.q
