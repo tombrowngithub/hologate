@@ -9,6 +9,7 @@ export default function Write() {
     const [title, setTitle] = useState('');
     const [story, setStory] = useState('');
 
+
     const router = useRouter()
 
     async function AddBook() {
@@ -24,7 +25,7 @@ export default function Write() {
                 'Content-Type': 'application/json'
             }
         })
-        const data = await response.json()
+        await response.json()
         await router.push("/")
 
     }
