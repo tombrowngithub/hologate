@@ -10,18 +10,18 @@ body {
 
 }
 
-.search{
+.search {
     padding: 10px;
     font-size: 20px;
 }
 
-.list{
+.list {
     padding: 0;
     list-style: none;
     text-align: center;
 }
 
-.listItem{
+.listItem {
     margin: 20px;
     font-size: 25px;
     color: #444;
@@ -29,13 +29,14 @@ body {
 }
 
 @media only screen and (min-width: 320px) and (max-width: 425px) {
-    .my-body{
+    .my-body {
         display: flex;
         flex-direction: column;
         /*align-items: center;*/
         /*justify-content: center;*/
         min-height: 100vh;
     }
+
     .my-container {
         width: 100%;
         display: flex;
@@ -58,31 +59,32 @@ body {
         overflow: hidden;
     }
 
-    .my-card h1{
+    .my-card h1 {
         font-weight: 400;
         font-size: 1.15em;
     }
 
-    .footer{
+    .footer {
         bottom: 0;
         position: fixed;
         margin-top: auto;
     }
 
-    .footer-tool{
+    .footer-tool {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 
-    .pagination{
+    .pagination {
         display: flex;
         align-items: center;
         justify-content: space-evenly;
+        position: -webkit-sticky;
     }
 
-    .settings{
+    .settings {
         position: fixed;
         height: 50%;
         bottom: 0;
@@ -91,12 +93,14 @@ body {
         box-shadow: 0 0 20px 1px #262626;
     }
 
-    .Main-Text{
-        background: linear-gradient(13deg,red 25%,blue 50%, darkgoldenrod 50%);
+    .Main-Text {
+        background: linear-gradient(13deg, red 25%, blue 50%, darkgoldenrod 50%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
-.bg-slate-500{
-    border-radius: 100%;
-}
+
+    .bg-slate-500 {
+        border-radius: 100%;
+    }
+
 }

@@ -40,7 +40,7 @@ export default function Footer() {
 
             <MyInfo Info={info} setInfo={setInfo}/>
 
-            <div className="w-screen h-[55px] bg-white
+            <div className="w-screen h-[55px] bg-white dark:bg-[#2d2d2d]
         shadow-lg flex justify-evenly items-center footer">
                 <div onClick={Settings} className="footer-tool p-3 active:bg-indigo-100 ">
                     <Cog8ToothIcon className="w-7 text-indigo-500 active:text-white"/>
