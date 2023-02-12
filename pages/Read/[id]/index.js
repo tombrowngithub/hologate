@@ -131,7 +131,7 @@ export default function Read({Books}) {
 // }
 
 export async function getServerSideProps({params}) {
-    const res = await fetch(`http://localhost:3000/api/${params.id}`)
+    const res = await fetch(`http://hologate.netlify/api/${params.id}`)
     if (res.status === 200) {
         const Books = await res.json()
         return {
