@@ -1,18 +1,18 @@
 import Link from "next/link";
 import {useState} from "react";
 import {XMarkIcon, Bars3Icon, MagnifyingGlassIcon} from '@heroicons/react/24/solid'
-import Model from "react-modal";
-import googleIcon from "@/pages/images/google.png"
+import {signOut} from "firebase/auth"
 import movieIcon from "@/pages/images/movieIcon.png"
 import Image from "next/image";
 import Login from "@/pages/NavBar Utilities/Login";
 import SignUp from "@/pages/NavBar Utilities/SignUp";
+import {auth} from "@/Firebase/firebaseConfig";
 
-export default function Navbar() {
+export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal}) {
     const [searchBar, setSearchBar] = useState(false)//Search Bar toggle state
     const [nav, setNav] = useState(false)//Nav Bar toggle state
-    const [regModal, setRegModel] = useState(false) //Modal toggle state for Registration button
-    const [loginModal, setLoginModal] = useState(false) //Modal toggle state for Login button
+   const [regModal, setRegModel] = useState(false) //Modal toggle state for Registration button
+    //const [loginModal, setLoginModal] = useState(false) //Modal toggle state for Login button
 
 
     const showNavBar = () => setNav(!nav)
@@ -29,7 +29,12 @@ export default function Navbar() {
     }
 
 
-
+    function Logout() {
+        signOut(auth).then(r => {
+            localStorage.clear()
+            setIsAuth(false)
+        })
+    }
 
     return (
         <div className="w-screen h-[55px] z-10 bg-white drop-shadow-lg top-0 dark:bg-[#2d2d2d]">
@@ -40,10 +45,12 @@ export default function Navbar() {
                             HaloGate Movies
                             <Image className="w-8" src={movieIcon} alt="Icon"/>
                         </h1>
-                        <MagnifyingGlassIcon onClick={()=>setSearchBar(!searchBar)} className="w-7 ml-9 cursor-pointer"/>
+                        <MagnifyingGlassIcon onClick={() => setSearchBar(!searchBar)}
+                                             className="w-7 ml-9 cursor-pointer"/>
                     </div>
-                    {searchBar && <input className="fixed py-1.5 border border-zinc-300 shadow-lg ml-9 text-center" type="search"
-                                         placeholder="Search by Title"/>}
+                    {searchBar &&
+                        <input className="fixed py-1.5 border border-zinc-300 shadow-lg ml-9 text-center" type="search"
+                               placeholder="Search by Title"/>}
                     <ul className="hidden md:flex">
 
                         <li className='cursor-pointer p-4'><Link href="home">Home</Link></li>
@@ -68,22 +75,40 @@ export default function Navbar() {
             <ul className={!nav ? "hidden" : "absolute bg-white w-full px-8 dark:bg-[#616161]"}>
 
                 <div className="flex flex-col my-4">
-                    <button
+                    {!isAuth && <button
                         onClick={LoginModal}
-                        className="rounded mt-2 bg-blue-800 dark:bg-[#2d2d2d] cursor-pointer text-white px-8 py-3 mb-4">Login
-                    </button>
-                    <button
-                        onClick={RegModal}
-                        className="rounded bg-blue-800 dark:bg-[#2d2d2d] px-8 py-3 cursor-pointer text-white">Sign Up
-                    </button>
+                        className="rounded mt-2 bg-blue-800 dark:bg-[#2d2d2d] cursor-pointer text-white px-8 py-3 mb-4">
+                        Login
+                    </button>}
+
+                    {!isAuth ? <button
+                            onClick={RegModal}
+                            className="rounded bg-blue-800 dark:bg-[#2d2d2d] px-8 py-3 cursor-pointer text-white">
+                            Sign Up
+                        </button>
+                        :
+                        <button
+                            onClick={Logout}
+                            className="rounded bg-blue-800 dark:bg-[#2d2d2d] px-8 py-3 cursor-pointer text-white">
+                            Log Out
+                        </button>
+                    }
                 </div>
             </ul>
 
             {/*Login modal*/}
-            <Login loginModal={loginModal} setLoginModal={setLoginModal}/>
+            <Login
+                loginModal={loginModal}
+                setLoginModal={setLoginModal}
+                setIsAuth={setIsAuth}
+            />
 
             {/*Registration modal*/}
-            <SignUp regModal={regModal} setRegModel={setRegModel}/>
+            <SignUp
+                regModal={regModal}
+                setRegModel={setRegModel}
+                setIsAuth={setIsAuth}
+            />
         </div>
     )
 }

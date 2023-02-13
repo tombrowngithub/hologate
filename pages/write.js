@@ -13,6 +13,7 @@ export default function Write() {
     const router = useRouter()
 
     async function AddBook() {
+        alert("You have published a book")
         const StoryObject = {
             title: title,
             book_body: story

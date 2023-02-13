@@ -8,7 +8,7 @@ import MyInfo from "@/pages/Footer Utilities/info";
 import MyAccount from "@/pages/Footer Utilities/account";
 
 
-export default function Footer() {
+export default function Footer({isAuth,setLoginModal}) {
     const [settings, setSettings] = useState(false)
     const [contact, setContact] = useState(false)
     const [account, setAccount] = useState(false)
@@ -23,7 +23,14 @@ export default function Footer() {
     }
 
     function Account() {
-        setAccount(!account)
+        if(isAuth){
+            setAccount(!account)
+        }
+        else{
+            setLoginModal(true)
+        }
+
+
     }
 
     function Info() {
@@ -36,7 +43,7 @@ export default function Footer() {
 
             <MyContactUs contact={contact} setContact={setContact} />
 
-            <MyAccount account={account} setAccount={setAccount}/>
+            <MyAccount account={account} setAccount={setAccount} isAuth={isAuth}/>
 
             <MyInfo Info={info} setInfo={setInfo}/>
 

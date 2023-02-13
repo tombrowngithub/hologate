@@ -1,23 +1,46 @@
 import Image from "next/image";
 import googleIcon from "@/pages/images/google.png";
 import Model from "react-modal";
-import {useState} from "react";
+import {useTheme} from "next-themes";
+import {useEffect, useState} from "react";
+import {auth, provider} from "@/Firebase/firebaseConfig";
+import {signInWithPopup, createUserWithEmailAndPassword} from "firebase/auth"
 
-export default function SignUp({regModal, setRegModel}) {
+
+export default function SignUp({regModal, setRegModel,setIsAuth}) {
 //The User Reg details
+    const {theme} = useTheme();
     const [userName, setUserName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const[bgColor, setBgColor] = useState("#f6f6f6");
+
+    useEffect(()=>{
+        if(theme === 'dark'){
+            setBgColor("#000")
+        }else{
+            setBgColor("#f6f6f6")
+        }
+    },[theme])
 
     function regButton(e) {
         e.preventDefault()
-        const userObject = {
-            user_name: userName,
-            user_email: email,
-            user_password: password,
-        }
-        console.log(userObject)
+        createUserWithEmailAndPassword(auth, email, password).then(r=>{
+          console.log(r)
+        })
         setRegModel(false)
+    }
+
+    function LoginWithGoogle() {
+        console.log("You logged in with google account")
+        signInWithPopup(auth, provider).then((result) => {
+            localStorage.setItem("isAuth", true)
+            setIsAuth(true)
+            setRegModel(false)
+
+            console.log(auth.currentUser)
+
+        })
     }
 
     return (
@@ -33,7 +56,7 @@ export default function SignUp({regModal, setRegModel}) {
                 bottom: 'auto',
                 marginRight: '-50%',
                 transform: 'translate(-50%, -50%)',
-                background: "#f6f6f6",
+                background: bgColor,
                 boxShadow: "0 6px 12px rgba(0, 0, 0, 0.31)"
             }
         }}>
@@ -50,13 +73,14 @@ export default function SignUp({regModal, setRegModel}) {
                     <input onChange={(e) => setPassword(e.target.value)}
                            className='w-[17rem] p-2 px-5 mb-4 rounded-md text-black shadow-lg' type="password"
                            placeholder='Password'/>
-                    <button type="submit"
+                    <button disabled={true} type="submit"
                             className='w-[17rem] mb-4 p-2 rounded-md shadow-lg bg-indigo-600 text-white'>Register
                     </button>
                     <p className="text-blue-800">OR</p>
-                    <div className="w-[17rem] p-1 mt-1.5 bg-white flex items-center rounded-md shadow-lg">
-                        <Image className="w-8" src={googleIcon} alt=""/>
-                        <p className="ml-0.5">Sign In with Google</p>
+                    <div onClick={LoginWithGoogle}
+                        className="w-[17rem] p-1 mt-1.5 bg-white flex items-center rounded-md shadow-lg">
+                        <Image className="w-8 p-1" src={googleIcon} alt=""/>
+                        <p className="ml-0.5  dark:text-blue-700">Sign In with Google</p>
                     </div>
 
                 </form>
