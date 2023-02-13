@@ -3,8 +3,21 @@ import HalaGateImage from "@/pages/images/HalogateImg.jpg";
 import Link from "next/link";
 import {FaFacebook, FaMailBulk, FaTwitter,FaWhatsapp} from "react-icons/fa";
 import Model from "react-modal";
+import {useTheme} from "next-themes";
+import {useEffect, useState} from "react";
 
 export default function ContactUs({contact, setContact}){
+    const {theme} = useTheme();
+    const[bgColor, setBgColor] = useState("#f6f6f6");
+
+    useEffect(()=>{
+        if(theme === 'dark'){
+            setBgColor("#000")
+        }else{
+            setBgColor("#f6f6f6")
+        }
+    },[theme])
+
     return(
         <Model isOpen={contact}
                ariaHideApp={false}
@@ -18,7 +31,7 @@ export default function ContactUs({contact, setContact}){
                        bottom: 'auto',
                        marginRight: '-50%',
                        transform: 'translate(-50%, -50%)',
-                       background: "#f6f6f6",
+                       background: bgColor,
                        boxShadow: "0 6px 12px rgba(0, 0, 0, 0.31)"
                    }
                }}>

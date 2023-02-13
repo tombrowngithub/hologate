@@ -1,11 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import {EnvelopeIcon, ClockIcon, CalendarDaysIcon } from '@heroicons/react/24/solid'
-
 import {FaUser,FaTimes} from "react-icons/fa";
 import Model from "react-modal";
+import {useTheme} from "next-themes";
+import {useEffect, useState} from "react";
 
 export default function Account({account, setAccount}) {
+    const {theme} = useTheme();
+    const[bgColor, setBgColor] = useState("#f6f6f6");
+
+    useEffect(()=>{
+        if(theme === 'dark'){
+            setBgColor("#000")
+        }else{
+            setBgColor("#f6f6f6")
+        }
+    },[theme])
+
     return (
         <Model isOpen={account}
                ariaHideApp={false}
@@ -20,13 +32,13 @@ export default function Account({account, setAccount}) {
                        bottom: 'auto',
                        marginRight: '-50%',
                        transform: 'translate(-50%, -50%)',
-                       background: "#f6f6f6",
+                       background: bgColor,
                        boxShadow: "0 6px 12px rgba(0, 0, 0, 0.31)"
                    }
                }}>
 
-            <div className="bg-white h-full w-full px-1 shadow-l">
-                <div className="p-2 rounded flex items-center justify-start border border-zinc-900">
+            <div className="bg-white dark:bg-[#151a1e] h-full w-full px-1 shadow-l">
+                <div className="p-2 rounded flex items-center justify-start border border-zinc-900 dark:border-[#0f6a80]">
                     <FaUser size="15%"/>
                     <p className="text-l font-bold mx-7">User name here</p>
                 </div>
