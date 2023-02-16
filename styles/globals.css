@@ -87,8 +87,19 @@ body {
     .settings {
         position: fixed;
         height: 50%;
-        bottom: 0;
+        top: 0;
+        bottom: 50%;
+        right: 0;
+        margin-top: 2.81rem;
+        background: #f6f6f6;
+        box-shadow: 0 0 20px 1px #262626;
+    }
+
+    .settings1 {
+        position: fixed;
+        height: 50%;
         top: 50%;
+        bottom: 0;
         background: #f6f6f6;
         box-shadow: 0 0 20px 1px #262626;
     }

@@ -1,7 +1,6 @@
 import {Cog8ToothIcon, PhoneArrowUpRightIcon, UserIcon, InformationCircleIcon,} from '@heroicons/react/24/solid'
 import {useState} from "react";
-import Image from "next/image";
-import Link from "next/link";
+
 import MySettings from "@/pages/Footer Utilities/settings";
 import MyContactUs from "@/pages/Footer Utilities/contactUs";
 import MyInfo from "@/pages/Footer Utilities/info";

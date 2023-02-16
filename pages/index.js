@@ -9,7 +9,6 @@ import {useState} from "react";
 const inter = Inter({subsets: ['latin']})
 
 export default function Home() {
-    //const [regModal, setRegModel] = useState(false) //Modal toggle state for Registration button
     const [loginModal, setLoginModal] = useState(false) //Modal toggle state for Login button
     const [isAuth, setIsAuth] = useState(false)
 

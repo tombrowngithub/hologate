@@ -5,23 +5,22 @@ import {signOut} from "firebase/auth"
 import movieIcon from "@/pages/images/movieIcon.png"
 import Image from "next/image";
 import Login from "@/pages/NavBar Utilities/Login";
-import SignUp from "@/pages/NavBar Utilities/SignUp";
 import {auth} from "@/Firebase/firebaseConfig";
 
 export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal}) {
     const [searchBar, setSearchBar] = useState(false)//Search Bar toggle state
     const [nav, setNav] = useState(false)//Nav Bar toggle state
-   const [regModal, setRegModel] = useState(false) //Modal toggle state for Registration button
+    // const [regModal, setRegModel] = useState(false) //Modal toggle state for Registration button
     //const [loginModal, setLoginModal] = useState(false) //Modal toggle state for Login button
 
 
     const showNavBar = () => setNav(!nav)
     const handleClose = () => setNav(!nav)
 
-    function RegModal() {
-        setNav(!nav)
-        setRegModel(true)
-    }
+    // function RegModal() {
+    //     setNav(!nav)
+    //     setRegModel(true)
+    // }
 
     function LoginModal() {
         setNav(!nav)
@@ -81,12 +80,7 @@ export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal}) {
                         Login
                     </button>}
 
-                    {!isAuth ? <button
-                            onClick={RegModal}
-                            className="rounded bg-blue-800 dark:bg-[#2d2d2d] px-8 py-3 cursor-pointer text-white">
-                            Sign Up
-                        </button>
-                        :
+                    {isAuth &&
                         <button
                             onClick={Logout}
                             className="rounded bg-blue-800 dark:bg-[#2d2d2d] px-8 py-3 cursor-pointer text-white">
@@ -104,11 +98,11 @@ export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal}) {
             />
 
             {/*Registration modal*/}
-            <SignUp
-                regModal={regModal}
-                setRegModel={setRegModel}
-                setIsAuth={setIsAuth}
-            />
+            {/*<SignUp*/}
+            {/*    regModal={regModal}*/}
+            {/*    setRegModel={setRegModel}*/}
+            {/*    setIsAuth={setIsAuth}*/}
+            {/*/>*/}
         </div>
     )
 }
