@@ -18,7 +18,7 @@ export default function Settings({MyExit, MyExitSettings}) {
     }
 
     return (
-        <div className="w-[50%] settings1 dark:bg-[#616161]">
+        <div className="w-[50%] settingsOne dark:bg-[#616161]">
             <div className="bg-white dark:bg-[#616161] flex justify-end">
                 <p className="mx-10 text-xl font-bold text-slate-700 dark:text-white">Settings</p>
                 <XMarkIcon onClick={myExit} className="w-6 bg-red-700"/>
