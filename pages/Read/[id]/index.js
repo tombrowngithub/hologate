@@ -7,6 +7,7 @@ import ReadSetting from "/pages/NavBar Utilities/ReadSetting"
 
 export default function Read({Books}) {
     const [readSettings, setReadSettings] = useState(false)
+
     //const [story, setStory] = useState("");
     // const [pageCount, setPageCount] = useState(0);
     // const [wordsPerPage, setWordsPerPage] = useState(250);
