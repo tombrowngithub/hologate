@@ -25,7 +25,7 @@ export default function Account({account, setAccount, isAuth}) {
                onRequestClose={() => setAccount(false)}
                style={{
                    content: {
-                       width: "100%",
+                       width: "MyWidth",
                        height: "80%",
                        top: '50%',
                        left: '50%',

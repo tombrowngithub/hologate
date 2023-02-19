@@ -29,12 +29,158 @@ body {
     font-weight: 300;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 425px) {
+@media only screen and (min-width: 768px) and (max-width: 2560px) {
+    .Pc-view {
+        display: none;
+    }
+    .MyWidth{
+        width: 50%;
+    }
+
+    .Home-navbar {
+        position: fixed;
+        top: 0;
+    }
+
     .my-body {
         display: flex;
         flex-direction: column;
-        /*align-items: center;*/
-        /*justify-content: center;*/
+        min-height: 100vh;
+    }
+
+    .my-container {
+        width: 60%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        /*grid-template-rows: repeat(auto-fill, 9.5rem);*/
+        grid-gap: 0.87em;
+        padding-top: 62px;
+        margin: auto;
+    }
+
+    .my-card {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        height: 12rem;
+        box-sizing: border-box;
+        background-color: #FFFFFF;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.31);
+        border-radius: 0.21rem;
+        overflow: hidden;
+    }
+
+    .title2 {
+        min-height: 3.5rem;
+        font-weight: 700;
+        font-size: 1em;
+        line-height: 1em;
+        overflow: hidden;
+        text-align: center;
+        background: linear-gradient(100deg, white 50%, darkgoldenrod 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .title {
+        min-height: 3.5rem;
+        font-weight: 700;
+        font-size: 1em;
+        line-height: 1em;
+        overflow: hidden;
+        text-align: center;
+        background: linear-gradient(100deg, white 10%, darkred 50%, white 50%, darkgoldenrod 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .read-con {
+        margin: auto;
+        height: 60px;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+    }
+
+    .Reading-screen {
+        width: 50%;
+        margin: auto;
+        padding-top: 65px;
+    }
+
+    .footer-tool {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pagination {
+        width: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 2rem auto;
+
+    }
+
+    .settings {
+        position: fixed;
+        height: 50%;
+        top: 0;
+        bottom: 50%;
+        right: 0;
+        margin-top: 2.81rem;
+        background: #f6f6f6;
+        box-shadow: 0 0 20px 1px #262626;
+    }
+
+    .Pc-setting{
+        margin: auto;
+    }
+
+    .settingsOne {
+        position: fixed;
+        width: 20%;
+        height: 100%;
+        top: 7%;
+        bottom: 0;
+        background: #f6f6f6;
+        box-shadow: 0 0 20px 1px #262626;
+    }
+
+    .Main-Text {
+        background: linear-gradient(13deg, red 25%, blue 50%, darkgoldenrod 50%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .bg-slate-500 {
+        border-radius: 100%;
+    }
+    .loginBtn{
+        border: 1px solid #444444;
+    }
+
+    .loginBtn:hover{
+        border: 1px solid #484848;
+    }
+
+    .Pc-footer{
+        background: white;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 425px) {
+    .Mobile-view {
+        display: none;
+    }
+
+    .my-body {
+        display: flex;
+        flex-direction: column;
         min-height: 100vh;
     }
 
@@ -58,14 +204,6 @@ body {
         border-radius: 0.21rem;
         overflow: hidden;
     }
-
-
-    @layer base {
-        .title2{
-            @apply dark:bg-white
-        }
-    }
-
 
     .title2 {
         min-height: 3.5rem;

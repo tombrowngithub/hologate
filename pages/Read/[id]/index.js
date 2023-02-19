@@ -83,15 +83,16 @@ export default function Read({Books}) {
 
     function MyReadSettings() {
         setReadSettings(!readSettings)
-        console.log("Read settings")
     }
 
     return (
         <>
             {readSettings && <ReadSetting MyExit={readSettings} MyExitSettings={setReadSettings}/>}
-            <div className="h-screen dark:bg-black">
-                <div
-                    className="dark:bg-[#616161] flex items-center justify-between  w-screen h-[45px] z-10 bg-white drop-shadow-lg top-0 sticky">
+            <div className="h-screen dark:bg-black ">
+
+                <div className="flex items-center justify-between dark:bg-[#616161]
+                w-screen h-[45px] z-10 bg-white drop-shadow-lg top-0 sticky read-con">
+
                     <Link className="flex items-center text-white bg-indigo-800 h-full p-2 dark:bg-[#2d2d2d]"
                           href="/"><ArrowLeftIcon
                         className="w-6 text-white active:text-white"/><span>Home</span></Link>
@@ -104,13 +105,15 @@ export default function Read({Books}) {
                         <p>Page 1</p>
                     </div>
 
-                    <div onClick={MyReadSettings } className=" ">
-                        {!readSettings ? <AdjustmentsHorizontalIcon className="w-7 text-indigo-900 active:text-white dark:text-white"/>
+                    <div onClick={MyReadSettings} className="Pc-view">
+                        {!readSettings ? <AdjustmentsHorizontalIcon
+                                className="w-7 text-indigo-900 active:text-white dark:text-white"/>
                             : <XMarkIcon className="w-7"/>}
                     </div>
                 </div>
 
-                <div className="px-1.5 bg-zinc-300 dark:bg-[#616161] shadow-lg mt-2 story ">
+
+                <div className="px-1.5 bg-zinc-300 dark:bg-[#616161] shadow-lg mt-2 story Reading-screen">
                     <div className="bg-white dark:bg-black px-1 px-2 text-start ">{parse(Books.book_body)}</div>
                 </div>
 
