@@ -1,18 +1,45 @@
-import {useEffect, useState} from "react";
+import { useState, useEffect } from "react"
 
-export default function Search() {
-    const [query, setQuery] = useState("");
+function SearchPage() {
+    const [query, setQuery] = useState("")
+    const [results, setResults] = useState([])
 
-    function showME() {
-        console.log(query)
+    useEffect(() => {
+        async function fetchSearchResults() {
+            const res = await fetch(`/api/search?q=${query}`)
+            const data = await res.json()
+            setResults(data)
+        }
+
+        if (query !== "") {
+            fetchSearchResults()
+        } else {
+            setResults([])
+        }
+    }, [query])
+
+    function handleSearch(event) {
+        event.preventDefault()
+        setQuery(event.target.query.value)
     }
 
     return (
         <div>
-            <input onChange={e => setQuery(e.target.value)}
-                   type="text" placeholder="Search..."
-                   className="search"/>
-        <button onClick={showME}>CHeck</button>
+            <form onSubmit={handleSearch}>
+                <input type="text" name="query" placeholder="Search books" />
+                <button type="submit">Search</button>
+            </form>
+
+            <ul>
+                {results.map((book) => (
+                    <>
+                        <li key={book._id}>{book.title}</li>
+                        <li>{book.book_body}</li>
+                    </>
+                ))}
+            </ul>
         </div>
     )
 }
+
+export default SearchPage

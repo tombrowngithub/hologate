@@ -1,12 +1,11 @@
 import {ArrowLeftCircleIcon, ArrowRightCircleIcon} from '@heroicons/react/24/outline'
-import Link from "next/link";
 import {Fragment, useEffect, useState} from "react";
 import axios from "axios";
 import parse from 'html-react-parser'
 import {useRouter} from "next/router";
 import ReactLoading from 'react-loading';
 
-export default function HomePage() {
+export default function HomePage({query}) {
     const [data, setData] = useState([]);
     const [pages, setPages] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
@@ -15,20 +14,36 @@ export default function HomePage() {
     const router = useRouter()
 
     useEffect(() => {
-        axios
-            .get(`/api/read_books?p=${pages}`)
-            .then((res) => {
-                setData(res.data);
-                setIsLoading(false);
-                setLoadingStates(Array(res.data.length).fill(false))// get the number of data we have and fill it with false
-            })
-            .catch((err) => console.log(err));
-    }, [pages]);
+        async function fetchSearchResults() {
+            setIsLoading(true);
+            const res = await fetch(`/api/search?q=${query}`)
+            const MyData = await res.json()
+            setData(MyData);
+
+            //setLoadingStates(Array(res.data.length).fill(false))
+        }
+
+        if (query !== "" && query.length > 2) {
+            fetchSearchResults().then(() => setIsLoading(false))
+        } else {
+            axios.get(`/api/read_books?p=${pages}`)
+                .then((res) => {
+                    setData(res.data);
+                    setIsLoading(false);
+                    setLoadingStates(Array(res.data.length).fill(false))// get the number of data we have and fill it with false
+                })
+                .catch((err) => console.log(err));
+        }
+
+
+    }, [pages, query]);
 
     async function check(id, index) {
-        setLoadingStates((prev) => [...prev.slice(0, index), true, ...prev.slice(index + 1)]);
+        setLoadingStates((prev) =>
+            [...prev.slice(0, index), true, ...prev.slice(index + 1)]);
         await router.push(`/Read/${id}`).finally(() => {
-            setLoadingStates((prev) => [...prev.slice(0, index), false, ...prev.slice(index + 1)]);
+            setLoadingStates((prev) =>
+                [...prev.slice(0, index), false, ...prev.slice(index + 1)]);
         });
     }
 
@@ -54,7 +69,8 @@ export default function HomePage() {
                                         </div>
 
                                         :
-                                        <div onClick={() => check(item._id, index)} className="my-card dark:bg-zinc-300">
+                                        <div onClick={() => check(item._id, index)}
+                                             className="my-card dark:bg-zinc-300">
                                             <div onClick={() => check(item._id, index)}
                                                  className="bg-slate-400 dark:bg-slate-800 cursor-pointer">
                                                 <h1 className="title title2 font-bold pt-0.5">{item.title}</h1>

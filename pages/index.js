@@ -11,6 +11,7 @@ const inter = Inter({subsets: ['latin']})
 export default function Home() {
     const [loginModal, setLoginModal] = useState(false) //Modal toggle state for Login button
     const [isAuth, setIsAuth] = useState(false)
+    const [query, setQuery] = useState("")
 
     return (
         <div className="my-body dark:bg-black">
@@ -26,11 +27,16 @@ export default function Home() {
                 setIsAuth={setIsAuth}
                 loginModal={loginModal}
                 setLoginModal={setLoginModal}
+                query={query}
+                setQuery={setQuery}
                 // regModal={regModal}
                 // setRegModal={setRegModel}
             />
 
-            <HomePage/>
+            <HomePage
+                query={query}
+                setQuery={setQuery}
+            />
             <Footer
                 isAuth={isAuth}
                 loginModal={loginModal}

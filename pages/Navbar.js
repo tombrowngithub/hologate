@@ -9,7 +9,7 @@ import {auth} from "@/Firebase/firebaseConfig";
 import MySettings from "@/pages/Footer Utilities/settings";
 import MyAccount from "@/pages/Footer Utilities/account";
 
-export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal, MyExit, MyExitSettings}) {
+export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal, setQuery}) {
     const [searchBar, setSearchBar] = useState(false)//Search Bar toggle state
     const [nav, setNav] = useState(false)//Nav Bar toggle state
     const [settings, setSettings] = useState(false)
@@ -42,10 +42,15 @@ export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal, My
     }
 
     function Logout() {
-        signOut(auth).then(r => {
+        signOut(auth).then(() => {
             localStorage.clear()
             setIsAuth(false)
         })
+    }
+
+    function handleSearch(e) {
+        e.preventDefault()
+        setQuery(e.target.query.value)
     }
 
     return (
@@ -67,7 +72,7 @@ export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal, My
                         </div>
 
                         {searchBar &&
-                            <input className="fixed py-1.5 border border-zinc-300 Pc-view
+                            <input onChange={(e)=> setQuery(e.target.value)} className="fixed py-1.5 border border-zinc-300 Pc-view
                         shadow-lg ml-9 text-center" type="search"
                                    placeholder="Search by Title"/>
                         }
@@ -95,14 +100,16 @@ export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal, My
                         </ul>
                     </div>
 
-                    <div className="Mobile-view flex border border-zinc-300 w-[30%]">
-                        <input className="w-full py-1.5 text-center"
+                    {/*SearchBar Pc*/}
+                    <form onSubmit={handleSearch} className="Mobile-view flex border border-zinc-300 w-[30%]">
+                        <input name="query" className="w-full py-1.5 text-center"
                                type="search"
                                placeholder="Search by Title"/>
-                        <MagnifyingGlassIcon
-                            onClick={() => setSearchBar(!searchBar)}
-                            className="w-7 cursor-pointer"/>
-                    </div>
+                        <button type="submit">
+                            <MagnifyingGlassIcon
+                                className="w-7 cursor-pointer"/>
+                        </button>
+                    </form>
 
                     <div className="hidden md:flex pr-4 pt-2">
                         <button

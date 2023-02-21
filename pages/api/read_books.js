@@ -1,5 +1,4 @@
 import connectDB from "../../DatabaseConnect/connectDB";
-//import FacebookModel from "../../model/FacebookModel";
 import BookModel from "../../Model/BookModel"
 
 export default async function readBooks(req, res) {
