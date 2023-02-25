@@ -247,11 +247,10 @@ body {
         align-items: center;
         justify-content: space-evenly;
         position: fixed;
-        top: 0;
         bottom: 0;
         left: 0;
         right: 0;
-        margin-top: 31rem;
+
     }
 
     .settings {

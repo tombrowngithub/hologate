@@ -101,8 +101,8 @@ export default function HomePage({query}) {
                 <div>Page {pages + 1}</div>
 
                 <button
-                    disabled={data.length === 0 && true}
-                    className={data.length === 0 ? "" : "active:bg-red-300 rounded-3xl"}
+                    disabled={data?.length === 0 & data.length < 9 && true}
+                    className={data?.length === 0 ? "" : "active:bg-red-300 rounded-3xl"}
                     onClick={() => setPages(pages + 1)}>
                     <ArrowRightCircleIcon
                         className={data.length === 0 ? "w-10 text-slate-400" : "w-10 text-indigo-600"}/>

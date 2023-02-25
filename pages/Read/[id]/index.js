@@ -6,80 +6,46 @@ import parse from 'html-react-parser'
 import ReadSetting from "/pages/NavBar Utilities/ReadSetting"
 import Head from "next/head";
 
-export default function Read({Books}) {
+export default function Read({ Books }) {
     const [readSettings, setReadSettings] = useState(false)
 
-    //const [story, setStory] = useState("");
-    // const [pageCount, setPageCount] = useState(0);
-    // const [wordsPerPage, setWordsPerPage] = useState(250);
-    // const [storyLength, setStoryLength] = useState([]);
+    const [story, setStory] = useState("");
+    const [pageCount, setPageCount] = useState(0);
+    const [wordsPerPage, setWordsPerPage] = useState(300);
+    const [storyLength, setStoryLength] = useState([]);
 
-    // const executeCallBack = useRef(false);
-    // useEffect(() => {
-    //     if (executeCallBack.current === true) {
-    //         return;
-    //     }
-    //     if (typeof window !== 'undefined') {
-    //         if (window.matchMedia("(max-height: 844px)").matches) {
-    //             setWordsPerPage(309);
-    //         }
-    //         if (window.matchMedia("(max-height: 736px)").matches) {
-    //             setWordsPerPage(298);
-    //         }
-    //         if (window.matchMedia("(max-height: 667px)").matches) {
-    //             setWordsPerPage(268);
-    //         }
-    //         if (window.matchMedia("(max-height: 640px)").matches) {
-    //             setWordsPerPage(211);
-    //         }
-    //         if (window.matchMedia("(max-height: 568px)").matches) {
-    //             setWordsPerPage(214);
-    //         }
-    //         if (window.matchMedia("(max-height: 480px)").matches) {
-    //             setWordsPerPage(175);
-    //         }
-    //         if (window.matchMedia("(max-height: 411px)").matches) {
-    //             setWordsPerPage(148);
-    //         }
-    //         if (window.matchMedia("(max-height: 375px)").matches) {
-    //             setWordsPerPage(133);
-    //         }
-    //         if (window.matchMedia("(max-height: 320px)").matches) {
-    //             setWordsPerPage(107);
-    //         }
-    //     }
-    //
-    //     let strArr = [];
-    //     // Loop through the doc (Books.book_body) I get from Database, partition it into an array length 5 with 10 words each
-    //     for (let i = 0; i <= Books.book_body.length - 10; i += wordsPerPage) {
-    //         const newStr = Books.book_body.split(" ")        // split the words into the array
-    //         const stringSlice = newStr.slice(i, i + wordsPerPage).join(" ")  //slice is base on the looped count
-    //         if (stringSlice.trim() !== "") {      // check for empty string in the array and remove it
-    //             strArr.push(stringSlice);      // Add each split words to a new array containing 10 words
-    //         }
-    //         if (strArr.length >= Books.book_body.length) { // break from the loop once the user reach the end of array containing words
-    //             break;
-    //         }
-    //     }
-    //     setStoryLength(strArr)
-    //     setStory(strArr[pageCount]) // Now I set the collected words to the user while I use the "pageCount" to navigate
-    // }, [Books.book_body, pageCount, wordsPerPage]);
-    //
-    // function NextPages() {
-    //     if (pageCount >= storyLength.length - 1) {
-    //         return;
-    //     }
-    //     setPageCount(prevState => prevState + 1);
-    //
-    // }
-    //
-    //
-    // function PrevPage() {
-    //     if (pageCount <= 0) {
-    //         return;
-    //     }
-    //     setPageCount(prevState => prevState - 1);
-    // }
+    useEffect(() => {
+
+        let strArr = [];
+        // Loop through the doc (Books.book_body) I get from Database, partition it into an array length 5 with 10 words each
+        for (let i = 0; i <= Books.book_body.length - 10; i += wordsPerPage) {
+            const newStr = Books.book_body.split(" ")        // split the words into the array
+            const stringSlice = newStr.slice(i, i + wordsPerPage).join(" ")  //slice is base on the looped count
+            if (stringSlice.trim() !== "") {      // check for empty string in the array and remove it
+                strArr.push(stringSlice);      // Add each split words to a new array containing 10 words
+            }
+            if (strArr.length >= Books.book_body.length) { // break from the loop once the user reach the end of array containing words
+                break;
+            }
+        }
+        setStoryLength(strArr)
+        setStory(strArr[pageCount]) // Now I set the collected words to the user while I use the "pageCount" to navigate
+    }, [Books.book_body, pageCount, wordsPerPage]);
+
+    function NextPages() {
+        if (pageCount >= storyLength.length - 1) {
+            return;
+        }
+        setPageCount(prevState => prevState + 1);
+    }
+
+
+    function PrevPage() {
+        if (pageCount <= 0) {
+            return;
+        }
+        setPageCount(prevState => prevState - 1);
+    }
 
 
     function MyReadSettings() {
@@ -87,7 +53,7 @@ export default function Read({Books}) {
     }
 
     return (
-        <>=
+        <div className="h-screen w-screen dark:bg-black ">
             <Head>
                 <title>{Books.title}</title>
                 <meta name="description" content="Generated by create next app"/>
@@ -96,7 +62,7 @@ export default function Read({Books}) {
             </Head>
 
             {readSettings && <ReadSetting MyExit={readSettings} MyExitSettings={setReadSettings}/>}
-            <div className="h-screen dark:bg-black ">
+            <div>
 
                 <div className="flex items-center justify-between dark:bg-[#616161]
                 w-screen h-[45px] z-10 bg-white drop-shadow-lg top-0 sticky read-con">
@@ -110,7 +76,7 @@ export default function Read({Books}) {
                     </div>
 
                     <div className="text-xs font-bold ">
-                        <p>Page 1</p>
+                        <p>Page {pageCount + 1}</p>
                     </div>
 
                     <div onClick={MyReadSettings} className="Pc-view">
@@ -121,39 +87,28 @@ export default function Read({Books}) {
                 </div>
 
 
-                <div className="px-1.5 bg-zinc-300 dark:bg-[#616161] shadow-lg mt-2 story Reading-screen">
-                    <div className="bg-white dark:bg-black px-1 px-2 text-start ">{parse(Books.book_body)}</div>
+                <div className="pb-[50px] px-1.5 bg-zinc-300 dark:bg-[#616161] shadow-lg mt-2 story Reading-screen">
+                    <div className="bg-white dark:bg-black px-1 px-2 text-start ">{parse(story)}</div>
                 </div>
 
 
-                {/*<div className="pagination bottom-0 left-0 right-0 bg-zinc-300 shadow-lg">*/}
-                {/*    <div onClick={PrevPage} className={pageCount <= 0 ? "" : "active:bg-red-300 rounded-3xl"}>*/}
-                {/*        <ArrowLeftCircleIcon className={pageCount <= 0 ? "w-10 text-slate-400" : "w-10 text-indigo-600"}/>*/}
-                {/*    </div>*/}
+                <div className="pagination bottom-0 left-0 right-0 bg-zinc-300 h-[50px] dark:bg-[#616161]">
+                    <div onClick={PrevPage} className={pageCount <= 0 ? "" : "active:bg-red-300 rounded-3xl"}>
+                        <ArrowLeftCircleIcon
+                            className={pageCount <= 0 ? "w-10 text-slate-400" : "w-10 text-indigo-600 dark:text-white"}/>
+                    </div>
 
-                {/*    <div onClick={NextPages}*/}
-                {/*         className={pageCount >= storyLength.length - 1 ? "" : "active:bg-red-300 rounded-3xl"}>*/}
-                {/*        <ArrowRightCircleIcon*/}
-                {/*            className={pageCount >= storyLength.length - 1 ? "w-10 text-slate-400" : "w-10 text-indigo-600"}/>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                    <button onClick={NextPages}
+                         className={pageCount >= storyLength.length - 1 ? "" : "active:bg-red-300 rounded-3xl"}>
+                        <ArrowRightCircleIcon
+                            className={pageCount >= storyLength.length - 1 ? "w-10 text-slate-400" : "w-10 text-indigo-600 dark:text-white"}/>
+                    </button>
+                </div>
             </div>
-        </>
+        </div>
 
     )
 }
-
-// export async function getStaticPaths() {
-//     await connectDB()
-//     const users = await BookModel.find()
-//
-//
-//     const paths = users.map((user) => ({
-//         params: { id: user._id.toString() },
-//     }))
-//
-//     return { paths, fallback: false }
-// }
 
 export async function getServerSideProps({params}) {
     const res = await fetch(`http://hologate.netlify.app/api/${params.id}`)
