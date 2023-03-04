@@ -4,6 +4,7 @@ import axios from "axios";
 import parse from 'html-react-parser'
 import {useRouter} from "next/router";
 import ReactLoading from 'react-loading';
+import Reading from '@/pages/Read/[id]/index'
 
 export default function HomePage({query}) {
     const [data, setData] = useState([]);
@@ -19,8 +20,6 @@ export default function HomePage({query}) {
             const res = await fetch(`/api/search?q=${query}`)
             const MyData = await res.json()
             setData(MyData);
-
-            //setLoadingStates(Array(res.data.length).fill(false))
         }
 
         if (query !== "" && query.length > 2) {
@@ -41,10 +40,14 @@ export default function HomePage({query}) {
     async function check(id, index) {
         setLoadingStates((prev) =>
             [...prev.slice(0, index), true, ...prev.slice(index + 1)]);
-        await router.push(`/Read/${id}`).finally(() => {
+
+        await router.push({
+            pathname: `Read/${id}`
+        }).finally(() => {
             setLoadingStates((prev) =>
                 [...prev.slice(0, index), false, ...prev.slice(index + 1)]);
         });
+
     }
 
     return (

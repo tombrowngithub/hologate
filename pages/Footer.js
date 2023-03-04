@@ -59,7 +59,7 @@ export default function Footer({isAuth, setLoginModal}) {
 
                 <div onClick={Account} className="footer-tool p-3 active:bg-indigo-100 ">
                     <UserIcon className="w-7 text-indigo-500 active:text-white"/>
-                    <p className="text-xs text-indigo-600 active:text-white">Account</p>
+                    <p className="text-xs text-indigo-600 active:text-white">Profile</p>
                 </div>
 
                 <div onClick={Info} className="footer-tool p-3 active:bg-indigo-100 ">

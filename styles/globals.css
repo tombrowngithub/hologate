@@ -33,7 +33,8 @@ body {
     .Pc-view {
         display: none;
     }
-    .MyWidth{
+
+    .MyWidth {
         width: 50%;
     }
 
@@ -137,7 +138,7 @@ body {
         box-shadow: 0 0 20px 1px #262626;
     }
 
-    .Pc-setting{
+    .Pc-setting {
         margin: auto;
     }
 
@@ -160,15 +161,16 @@ body {
     .bg-slate-500 {
         border-radius: 100%;
     }
-    .loginBtn{
+
+    .loginBtn {
         border: 1px solid #444444;
     }
 
-    .loginBtn:hover{
+    .loginBtn:hover {
         border: 1px solid #484848;
     }
 
-    .Pc-footer{
+    .Pc-footer {
         background: white;
     }
 }
@@ -242,6 +244,22 @@ body {
         justify-content: center;
     }
 
+    /*.paginationHomePage {*/
+    /*    display: flex;*/
+    /*    align-items: center;*/
+    /*    justify-content: space-evenly;*/
+    /*    position: fixed;*/
+    /*    top: 0;*/
+    /*    bottom: 0;*/
+    /*    left: 0;*/
+    /*    right: 0;*/
+    /*    margin-top: 31rem;*/
+    /*}*/
+    .Reading-screen {
+        padding-bottom: 5.3125rem;
+        margin: auto;
+    }
+
     .pagination {
         display: flex;
         align-items: center;
@@ -250,7 +268,8 @@ body {
         bottom: 0;
         left: 0;
         right: 0;
-
+        padding-bottom: 60px;
+        padding-top: 20px;
     }
 
     .settings {
