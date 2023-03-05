@@ -58,7 +58,7 @@ export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal, se
             {settings && <MySettings MyExit={settings} MyExitSettings={setSettings}/>}
             <MyAccount account={account} setAccount={setAccount} isAuth={isAuth}/>
 
-            <div className="w-screen h-[45px] z-10 bg-white drop-shadow-lg top-0 dark:bg-[#2d2d2d] Home-navbar">
+            <div className="w-screen h-[55px] z-10 bg-white drop-shadow-lg top-0 dark:bg-[#2d2d2d] Home-navbar">
                 <div className="px-2 flex justify-between items-center w-full h-full">
                     <div className="flex items-center h-[55px]">
                         <div className="flex">
