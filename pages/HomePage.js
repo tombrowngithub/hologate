@@ -1,16 +1,19 @@
 import {ArrowLeftCircleIcon, ArrowRightCircleIcon} from '@heroicons/react/24/outline'
-import {Fragment, useEffect, useState} from "react";
+import {Fragment, useContext, useEffect, useState} from "react";
 import axios from "axios";
 import parse from 'html-react-parser'
 import {useRouter} from "next/router";
 import ReactLoading from 'react-loading';
-import Reading from '@/pages/Read/[id]/index'
+import {UserState} from "@/pages/StateContext";
+import ElapsedTime from "@/pages/NavBar Utilities/ElapsedTime";
 
 export default function HomePage({query}) {
     const [data, setData] = useState([]);
     const [pages, setPages] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [loadingStates, setLoadingStates] = useState([]);
+
+    const {setStartTime, isAuth, setId, TimeRead} = useContext(UserState)
 
     const router = useRouter()
 
@@ -44,6 +47,10 @@ export default function HomePage({query}) {
         await router.push({
             pathname: `Read/${id}`
         }).finally(() => {
+            if (isAuth) {
+                setStartTime(new Date())
+            }
+            setId(id)
             setLoadingStates((prev) =>
                 [...prev.slice(0, index), false, ...prev.slice(index + 1)]);
         });
@@ -52,6 +59,7 @@ export default function HomePage({query}) {
 
     return (
         <>
+            {TimeRead && <ElapsedTime/>}
             <div className="my-container px-2 mx-auto">
                 {isLoading ?
                     <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
@@ -76,7 +84,7 @@ export default function HomePage({query}) {
                                              className="my-card dark:bg-zinc-300">
                                             <div onClick={() => check(item._id, index)}
                                                  className="bg-slate-400 dark:bg-slate-800 cursor-pointer">
-                                                <h1 className="title title2 font-bold pt-0.5">{item.title}</h1>
+                                                <h1 className="title  font-bold pt-0.5">{item.title}</h1>
                                             </div>
 
                                             <div

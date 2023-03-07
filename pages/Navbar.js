@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {XMarkIcon, Bars3Icon, MagnifyingGlassIcon, Cog8ToothIcon, UserIcon} from '@heroicons/react/24/solid'
 import {signOut} from "firebase/auth"
 import movieIcon from "@/pages/images/movieIcon.png"
@@ -8,12 +8,17 @@ import Login from "@/pages/NavBar Utilities/Login";
 import {auth} from "@/Firebase/firebaseConfig";
 import MySettings from "@/pages/Footer Utilities/settings";
 import MyAccount from "@/pages/Footer Utilities/account";
+import {UserState} from "@/pages/StateContext";
+import {useRouter} from "next/router";
 
 export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal, setQuery}) {
     const [searchBar, setSearchBar] = useState(false)//Search Bar toggle state
     const [nav, setNav] = useState(false)//Nav Bar toggle state
     const [settings, setSettings] = useState(false)
     const [account, setAccount] = useState(false)
+
+    const {setStartTime} = useContext(UserState)
+    const router = useRouter()
 
     // const [regModal, setRegModel] = useState(false) //Modal toggle state for Registration button
     //const [loginModal, setLoginModal] = useState(false) //Modal toggle state for Login button
@@ -45,6 +50,8 @@ export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal, se
         signOut(auth).then(() => {
             localStorage.clear()
             setIsAuth(false)
+            setStartTime(null)
+            router.reload()
         })
     }
 

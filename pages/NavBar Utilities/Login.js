@@ -2,13 +2,15 @@ import Model from "react-modal";
 import Image from "next/image";
 import googleIcon from "@/pages/images/google.png";
 import facebookIcon from "@/pages/images/facebook.png";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {auth, provider} from "@/Firebase/firebaseConfig";
 import {signInWithPopup, FacebookAuthProvider} from "firebase/auth"
 import {useTheme} from "next-themes";
+import {UserState} from "@/pages/StateContext";
 
 export default function Login({loginModal, setLoginModal, setIsAuth}) {
     const {theme} = useTheme();
+    const {setStartTime, myId} = useContext(UserState)
     const [bgColor, setBgColor] = useState("#f6f6f6");
 
     useEffect(() => {
@@ -25,6 +27,9 @@ export default function Login({loginModal, setLoginModal, setIsAuth}) {
             localStorage.setItem("isAuth", true)
             setIsAuth(true)
             setLoginModal(false)
+            if (myId !== null) {
+                setStartTime(new Date())
+            }
         }).catch((error) => console.log(error))
     }
 
@@ -34,6 +39,10 @@ export default function Login({loginModal, setLoginModal, setIsAuth}) {
             localStorage.setItem("isAuth", true)
             setIsAuth(true)
             setLoginModal(false)
+            if (myId !== null) {
+                setStartTime(new Date())
+            }
+
         }).catch((error) => console.log(error))
     }
 

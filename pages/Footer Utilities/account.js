@@ -5,6 +5,7 @@ import Model from "react-modal";
 import {useTheme} from "next-themes";
 import {useEffect, useState} from "react";
 import {auth} from "@/Firebase/firebaseConfig"
+import OnlineTime from "@/pages/Footer Utilities/onlineTime";
 
 export default function Account({account, setAccount, isAuth}) {
     const {theme} = useTheme();
@@ -48,25 +49,27 @@ export default function Account({account, setAccount, isAuth}) {
 
                 <div className="flex justify-between">
                     <div className="flex">
-                        <EnvelopeIcon className="w-5 text-purple-900"/><p className="text-l font-bold">Email:</p>
+                        <EnvelopeIcon className="w-5 text-purple-900 dark:text-white"/><p className="text-l font-bold dark:text-white">Email:</p>
                     </div>
-                    <span className="text-zinc-500 ml-4 text-purple-900">{auth.currentUser.email}</span>
+                    <span className="text-zinc-500 ml-4 text-purple-900 dark:text-white">{auth.currentUser.email}</span>
                 </div>
 
                 <div className="flex my-3 justify-between">
                     <div className="flex">
-                        <CalendarDaysIcon className="w-5 text-purple-900"/><p className="text-l font-bold">Date
+                        <CalendarDaysIcon className="w-5 text-purple-900 dark:text-white"/><p className="text-l font-bold dark:text-white">Date
                         Registered:</p>
                     </div>
-                    <span className="text-xs text-zinc-500 ml-4 text-purple-900">{auth.currentUser.metadata.creationTime}</span>
+                    <span className="dark:text-white text-xs text-zinc-500 ml-4 text-purple-900">{auth.currentUser.metadata.creationTime}</span>
                 </div>
 
                 <div className="flex justify-between">
                     <div className="flex">
-                        <ClockIcon className="w-5 text-purple-900"/><p className="text-l font-bold">Time spent
+                        <ClockIcon className="w-5 text-purple-900 dark:text-white"/><p className="font-bold dark:text-white">Time spent
                         reading:</p>
                     </div>
-                    <span className="text-zinc-500 ml-4 text-purple-900">Time count here</span>
+                    <span className="text-zinc-500 ml-4 text-purple-900 dark:text-white">
+                        <OnlineTime/>
+                    </span>
                 </div>
             </div>}
         </Model>

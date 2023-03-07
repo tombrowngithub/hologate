@@ -1,5 +1,5 @@
 import {AdjustmentsHorizontalIcon, ArrowLeftIcon, XMarkIcon} from '@heroicons/react/24/solid'
-import Link from "next/link";
+import {useRouter} from "next/router";
 import {ArrowLeftCircleIcon, ArrowRightCircleIcon} from "@heroicons/react/24/outline";
 import {useEffect, useState, useContext} from "react";
 import parse from 'html-react-parser'
@@ -7,15 +7,21 @@ import ReadSetting from "/pages/NavBar Utilities/ReadSetting"
 import Head from "next/head";
 import {UserState} from "@/pages/StateContext";
 import Login from "@/pages/NavBar Utilities/Login";
+import MyAccount from "@/pages/Footer Utilities/account";
 
 export default function Read({Books}) {
-    const {loginModal, setLoginModal, isAuth, setIsAuth} = useContext(UserState)
+    const {
+        loginModal, setLoginModal, isAuth, setId,
+        setIsAuth, account, setAccount, setStartTime,setTimeRead
+    } = useContext(UserState)
 
     const [readSettings, setReadSettings] = useState(false)
     const [story, setStory] = useState("");
     const [pageCount, setPageCount] = useState(0);
     const [wordsPerPage, setWordsPerPage] = useState(300);
     const [storyLength, setStoryLength] = useState([]);
+
+    const router = useRouter()
 
 
     useEffect(() => {
@@ -41,7 +47,7 @@ export default function Read({Books}) {
         }
         if (!isAuth && pageCount > 0) {
             setLoginModal(true)
-            console.log("You can't view this page again, login")
+            //console.log("You can't view this page again, login")
 
         } else {
             setPageCount(prevState => prevState + 1);
@@ -61,6 +67,14 @@ export default function Read({Books}) {
         setReadSettings(!readSettings)
     }
 
+    function HomeBtn() {
+        router.push("/").then(() => {
+            setId(null)
+            setStartTime(null)
+            setTimeRead(true)
+        })
+    }
+
     return (
         <div className="h-screen dark:bg-black ">
             <Head>
@@ -72,16 +86,16 @@ export default function Read({Books}) {
 
 
             {readSettings && <ReadSetting MyExit={readSettings} MyExitSettings={setReadSettings}/>}
-
+            <MyAccount account={account} setAccount={setAccount} isAuth={isAuth}/>
             <div>
 
 
                 <div className="flex items-center justify-between dark:bg-[#616161]
                 w-screen h-[45px] z-10 bg-white drop-shadow-lg top-0 sticky read-con">
 
-                    <Link className="flex items-center text-white bg-indigo-800 h-full p-2 dark:bg-[#2d2d2d]"
-                          href="/"><ArrowLeftIcon
-                        className="w-6 text-white active:text-white"/><span>Home</span></Link>
+                    <button className="flex items-center text-white bg-indigo-800 h-full p-2 dark:bg-[#2d2d2d]"
+                            onClick={HomeBtn}><ArrowLeftIcon
+                        className="w-6 text-white active:text-white"/><span>Home</span></button>
 
                     <div className="text-sm font-bold ">
                         <p>{Books.title}</p>

@@ -1,5 +1,5 @@
 import {Cog8ToothIcon, PhoneArrowUpRightIcon, UserIcon, InformationCircleIcon,} from '@heroicons/react/24/solid'
-import {useState} from "react";
+import {useContext, useState} from "react";
 
 import MySettings from "@/pages/Footer Utilities/settings";
 import MyContactUs from "@/pages/Footer Utilities/contactUs";
@@ -7,13 +7,14 @@ import MyInfo from "@/pages/Footer Utilities/info";
 import MyAccount from "@/pages/Footer Utilities/account";
 import Link from "next/link";
 import {FaFacebook, FaMailBulk, FaTwitter, FaWhatsapp} from "react-icons/fa";
+import {UserState} from "@/pages/StateContext";
 
 
 export default function Footer({isAuth, setLoginModal}) {
     const [settings, setSettings] = useState(false)
     const [contact, setContact] = useState(false)
-    const [account, setAccount] = useState(false)
     const [info, setInfo] = useState(false)
+    const {account, setAccount} = useContext(UserState)
 
     function Settings() {
         setSettings(!settings)
