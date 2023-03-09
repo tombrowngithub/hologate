@@ -59,7 +59,7 @@ export default function HomePage({query}) {
 
     return (
         <>
-            {TimeRead && <ElapsedTime/>}
+            {(TimeRead && isAuth) && <ElapsedTime/>}
             <div className="my-container px-2 mx-auto">
                 {isLoading ?
                     <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
@@ -103,20 +103,20 @@ export default function HomePage({query}) {
             <div className="mt-3 pagination">
                 <button
                     disabled={pages === 0 && true}
-                    className={pages === 0 ? "" : "active:bg-red-300 rounded-3xl"}
+                    className={pages === 0 ? "flex items-center" : "active:bg-red-300 rounded-3xl flex items-center"}
                     onClick={() => setPages(pages - 1)}>
-                    <ArrowLeftCircleIcon className={pages === 0 ? "w-10 text-slate-400" : "w-10 text-indigo-600"}/>
-
+                    <ArrowLeftCircleIcon className={pages === 0 ? "w-6 text-slate-400" : "w-6 text-indigo-600"}/>
+                    <p className={pages === 0 ? "w-6 text-slate-400":"w-10 text-indigo-600"}>BACK</p>
                 </button>
 
-                <div>Page {pages + 1}</div>
+                <div className="ml-3">Page {pages + 1}</div>
 
                 <button
                     disabled={data?.length === 0 & data.length < 9 && true}
-                    className={data?.length === 0 ? "" : "active:bg-red-300 rounded-3xl"}
-                    onClick={() => setPages(pages + 1)}>
+                    className={data?.length === 0 ? "flex items-center" : "active:bg-red-300 rounded-3xl flex items-center"}
+                    onClick={() => setPages(pages + 1)}><p className="w-10 text-indigo-600">NEXT</p>
                     <ArrowRightCircleIcon
-                        className={data.length === 0 ? "w-10 text-slate-400" : "w-10 text-indigo-600"}/>
+                        className={data.length === 0 ? "w-6 text-slate-400" : "w-6 text-indigo-600"}/>
                 </button>
             </div>
 

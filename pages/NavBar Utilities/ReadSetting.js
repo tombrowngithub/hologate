@@ -1,4 +1,4 @@
-import {MoonIcon, SunIcon, UserIcon, ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/solid";
+import {MoonIcon, SunIcon, UserIcon, ChevronDownIcon, ChevronUpIcon} from "@heroicons/react/24/solid";
 import {useTheme} from "next-themes";
 import {useContext, useEffect, useState} from "react";
 import {UserState} from "@/pages/StateContext";
@@ -35,22 +35,28 @@ export default function ReadSetting({MyExit, MyExitSettings, FontSizeDown, FontS
                         <span>Mode</span>
                     </label>
                     {currentTheme === 'dark' ?
-                        (<MoonIcon onClick={() => setTheme('light')} className="border border-zinc-600 w-7 mr-1"/>)
-                        : (<SunIcon onClick={() => setTheme('dark')} className="border border-zinc-600  w-7 mr-1"/>)
+                        (<MoonIcon onClick={() => setTheme('light')} className="cursor-pointer border border-zinc-600 w-7 mr-1"/>)
+                        : (<SunIcon onClick={() => setTheme('dark')} className="cursor-pointer border border-zinc-600  w-7 mr-1"/>)
                     }
-
                 </div>
                 <hr/>
                 <div onClick={Account}
-                    className="active:text-xl active:bg-slate-400 flex items-center justify-between mt-1 pl-1 mb-1">
-                    <p>Profile</p>  <UserIcon className="border border-zinc-600 w-7 p-0.6 mr-1"/>
+                    className="active:text-xl active:bg-slate-400 flex items-center justify-between mt-1 pl-1 mb-1 cursor-pointer">
+                    <p className="text-blue-900 text-lg">Profile</p>  <UserIcon className="text-blue-900 border border-blue-600 w-7 p-0.6 mr-1"/>
                 </div>
                 <hr/>
                 <div className="flex items-center justify-between mt-1 pl-1 mb-1">
                     <p>Font size</p>
-                    <ChevronLeftIcon onClick={FontSizeDown} className="border border-zinc-600 w-7 p-0.6"/>
+                    <button onClick={FontSizeDown} className={fontSizeCount === 5 ? "bg-gray-300": "border border-zinc-600 w-7 p-0.6 mr-1"}>
+                        <ChevronDownIcon />
+                    </button>
+
                     <p>{fontSizeCount}</p>
-                    <ChevronRightIcon onClick={FontSizeUp} className="border border-zinc-600 w-7 p-0.6 mr-1"/>
+
+                    <button  onClick={FontSizeUp} className={fontSizeCount === 20 ? "bg-gray-300": "border border-zinc-600 w-7 p-0.6 mr-1"}>
+                        <ChevronUpIcon/>
+                    </button>
+
                 </div>
             </div>
 

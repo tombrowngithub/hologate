@@ -117,10 +117,35 @@ export default function Read({Books}) {
                                           fontSizeCount={fontSizeCount}/>}
             <MyAccount account={account} setAccount={setAccount} isAuth={isAuth}/>
             <div>
+                <div className="Mobile-view dark:bg-[#616161] drop-shadow-lg bg-white read-con">
+                    <div className="z-10  read-con-pc">
+
+                        <button className="flex items-center text-white bg-purple-900  p-3 rounded dark:bg-[#2d2d2d]"
+                                onClick={HomeBtn}><ArrowLeftIcon
+                            className="w-6 text-white active:text-white"/><span>Home</span></button>
+
+                        <div className="text-sm font-bold dark:bg-[#2d2d2d] p-3 rounded">
+                            <p className="text-purple-900 text-xl dark:text-purple-300">{Books.title}</p>
+                        </div>
+
+                        <div className="text-xs font-bold ">
+                            <p>Page {pageCount + 1}</p>
+                        </div>
+
+                        <div onClick={MyReadSettings} className="read-setting-pc border border-indigo-900 rounded p-1">
+                            {!readSettings ? <AdjustmentsHorizontalIcon
+                                    className="w-7 text-indigo-900 active:text-white dark:text-white"/>
+                                : <XMarkIcon className="w-7"/>}
+                        </div>
+                    </div>
+                </div>
+
+
+
 
 
                 <div className="flex items-center justify-between dark:bg-[#616161]
-                w-screen h-[45px] z-10 bg-white drop-shadow-lg top-0 sticky read-con">
+                w-screen h-[45px] z-10 bg-white drop-shadow-lg top-0 sticky Pc-view">
 
                     <button className="flex items-center text-white bg-indigo-800 h-full p-2 dark:bg-[#2d2d2d]"
                             onClick={HomeBtn}><ArrowLeftIcon
@@ -134,7 +159,7 @@ export default function Read({Books}) {
                         <p>Page {pageCount + 1}</p>
                     </div>
 
-                    <div onClick={MyReadSettings} className="Pc-view">
+                    <div onClick={MyReadSettings} className="read-setting-pc">
                         {!readSettings ? <AdjustmentsHorizontalIcon
                                 className="w-7 text-indigo-900 active:text-white dark:text-white"/>
                             : <XMarkIcon className="w-7"/>}

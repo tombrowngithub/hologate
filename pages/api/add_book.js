@@ -2,11 +2,16 @@ import connectDB from "../../DatabaseConnect/connectDB"; //Database connection l
 import BookModel from "../../Model/BookModel"; //Database model
 
 export default async function AddBook(req, res) {
-    const data = req.body
-    await connectDB()
+    try {
+        const data = req.body
+        await connectDB()
 
-    const myDoc = await BookModel.create(data)
-    res.json({myDoc})
+        const myDoc = await BookModel.create(data)
+        res.json({myDoc})
+    }catch (err) {
+        console.log("This post cannot be published")
+    }
+
 
 
 }
