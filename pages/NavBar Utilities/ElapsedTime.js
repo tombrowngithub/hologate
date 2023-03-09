@@ -19,9 +19,9 @@ export default function ElapsedTime() {
             <div className="flex flex-col text-center dark:bg-[#616161]">
                 <hr/>
                 <div className="w-full flex flex-col mt-2 items-start">
-                    <h1 className="text-lg font-bold shadow-lg w-full flex justify-between px-5 dark:text-white">Seconds:: <span className="text-green-700">{elapsedTime.seconds}</span></h1>
-                    <h1 className="text-lg font-bold shadow-lg w-full flex justify-between px-5 dark:text-white">Minutes:: <span className="text-green-700">{elapsedTime.minutes}</span></h1>
-                    <h1 className="text-lg font-bold shadow-lg w-full flex justify-between px-5 dark:text-white">Hours:: <span className="text-green-700">{elapsedTime.hours}</span></h1>
+                    <h1 className="text-lg font-bold shadow-lg w-full flex justify-between px-5 dark:text-white">Seconds:: <span className="text-green-700 dark:text-white">{elapsedTime.seconds}</span></h1>
+                    <h1 className="text-lg font-bold shadow-lg w-full flex justify-between px-5 dark:text-white">Minutes:: <span className="text-green-700 dark:text-white">{elapsedTime.minutes}</span></h1>
+                    <h1 className="text-lg font-bold shadow-lg w-full flex justify-between px-5 dark:text-white">Hours:: <span className="text-green-700 dark:text-white">{elapsedTime.hours}</span></h1>
                 </div>
             </div>
         </div>

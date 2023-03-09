@@ -15,9 +15,6 @@ export default function ReadSetting({MyExit, MyExitSettings, FontSizeDown, FontS
     if (!mounted) return null;
     const currentTheme = theme === 'system' ? systemTheme : theme;
 
-    function myExit() {
-        MyExitSettings(!MyExit)
-    }
 
     function Account() {
         MyExitSettings(!MyExit)

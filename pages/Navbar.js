@@ -51,7 +51,7 @@ export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal, se
             localStorage.clear()
             setIsAuth(false)
             setStartTime(null)
-            router.reload()
+
         })
     }
 
@@ -99,7 +99,7 @@ export default function Navbar({isAuth, setIsAuth, loginModal, setLoginModal, se
                                      className="p-3.5 active:bg-indigo-100 flex items-center">
                                     <UserIcon className="text-zinc-500 w-7 dark:text-white active:text-white"/>
                                     <p className="dark:text-white active:text-white">
-                                        {isAuth ? auth.currentUser.displayName : "Account"}
+                                        {isAuth && auth.currentUser ? auth.currentUser.displayName : "Account"}
                                     </p>
                                 </div>
                             </li>

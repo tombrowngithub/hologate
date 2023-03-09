@@ -38,7 +38,7 @@ export default function Account({account, setAccount, isAuth}) {
                    }
                }}>
 
-            {isAuth && <div className="bg-white dark:bg-[#151a1e] h-full w-full px-1 shadow-l">
+            {isAuth && auth.currentUser && <div className="bg-white dark:bg-[#151a1e] h-full w-full px-1 shadow-l">
                 <div
                     className="p-2 rounded flex items-center justify-start border border-zinc-900 dark:border-[#0f6a80]">
                     <FaUser size="15%"/>

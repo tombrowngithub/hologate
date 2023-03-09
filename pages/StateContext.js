@@ -1,5 +1,5 @@
 'use client';
-import {createContext, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 
 export const UserState = createContext(null);
 
@@ -14,6 +14,18 @@ function Context({children}) {
         seconds: "", minutes: "", hours: ""
     })
 
+    // When the component mounts, check if the user is logged in
+    useEffect(() => {
+        const loggedIn = localStorage.getItem('isAuth');
+        if (loggedIn) {
+            setIsAuth(true);
+        }
+    }, []);
+
+    // When the `isAuth` state changes, update localStorage
+    // useEffect(() => {
+    //     localStorage.setItem('isAuth', isAuth);
+    // }, [isAuth]);
 
     return (
         <UserState.Provider value={{

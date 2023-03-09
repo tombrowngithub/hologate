@@ -12,8 +12,6 @@ const inter = Inter({subsets: ['latin']})
 
 export default function Home() {
     const { loginModal, setLoginModal, isAuth, setIsAuth } = useContext(UserState);
-    //const [loginModal, setLoginModal] = useState(false) //Modal toggle state for Login button
-
     const [query, setQuery] = useState("")
 
     return (
