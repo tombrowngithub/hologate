@@ -12,7 +12,7 @@ import MyAccount from "@/pages/Footer Utilities/account";
 export default function Read({Books}) {
     const {
         loginModal, setLoginModal, isAuth, setId,
-        setIsAuth, account, setAccount, setStartTime,setTimeRead
+        setIsAuth, account, setAccount, setStartTime, setTimeRead
     } = useContext(UserState)
 
     const [readSettings, setReadSettings] = useState(false)
@@ -21,8 +21,11 @@ export default function Read({Books}) {
     const [wordsPerPage, setWordsPerPage] = useState(300);
     const [storyLength, setStoryLength] = useState([]);
 
+    const [fontSize, setFontSize] = useState("bg-white dark:bg-black px-1 px-2 text-start")
+    const [fontSizeCount, setFontSizeCount] = useState(5)
     const router = useRouter()
 
+    console.log(fontSizeCount)
 
     useEffect(() => {
         let strArr = [];
@@ -75,6 +78,34 @@ export default function Read({Books}) {
         })
     }
 
+    function FontSizeUp() {
+        if (fontSizeCount === 5) {
+            setFontSize("bg-white dark:bg-black px-1 px-2 text-start text-xl")
+            setFontSizeCount(fontSizeCount + 5)
+        } else if (fontSizeCount === 10) {
+            setFontSize("bg-white dark:bg-black px-1 px-2 text-start text-2xl")
+            setFontSizeCount(fontSizeCount + 5)
+        }
+        else if (fontSizeCount === 15) {
+            setFontSize("bg-white dark:bg-black px-1 px-2 text-start text-3xl")
+            setFontSizeCount(fontSizeCount + 5)
+        }
+    }
+
+    function FontSizeDown() {
+        if (fontSizeCount === 20) {
+            setFontSize("bg-white dark:bg-black px-1 px-2 text-start text-2xl")
+            setFontSizeCount(fontSizeCount - 5)
+        } else if (fontSizeCount === 15) {
+            setFontSize("bg-white dark:bg-black px-1 px-2 text-start text-xl")
+            setFontSizeCount(fontSizeCount - 5)
+        }
+        else if (fontSizeCount === 10) {
+            setFontSize("bg-white dark:bg-black px-1 px-2 text-start")
+            setFontSizeCount(fontSizeCount - 5)
+        }
+    }
+
     return (
         <div className="h-screen dark:bg-black ">
             <Head>
@@ -85,7 +116,8 @@ export default function Read({Books}) {
             </Head>
 
 
-            {readSettings && <ReadSetting MyExit={readSettings} MyExitSettings={setReadSettings}/>}
+            {readSettings && <ReadSetting MyExit={readSettings} MyExitSettings={setReadSettings}
+                                          FontSizeDown={FontSizeDown} FontSizeUp={FontSizeUp} fontSizeCount={fontSizeCount}/>}
             <MyAccount account={account} setAccount={setAccount} isAuth={isAuth}/>
             <div>
 
@@ -114,7 +146,7 @@ export default function Read({Books}) {
 
 
                 <div className="pb-[50px] px-1.5 bg-zinc-300 dark:bg-[#616161] shadow-lg mt-2 story Reading-screen">
-                    <div className="bg-white dark:bg-black px-1 px-2 text-start ">{parse(story)}</div>
+                    <div className={fontSize}>{parse(story)}</div>
                 </div>
 
 
@@ -123,6 +155,8 @@ export default function Read({Books}) {
                         <ArrowLeftCircleIcon
                             className={pageCount <= 0 ? "w-10 text-slate-400" : "w-10 text-indigo-600 dark:text-white"}/>
                     </div>
+
+
 
                     <button onClick={NextPages}
                             className={pageCount >= storyLength.length - 1 ? "" : "active:bg-red-300 rounded-3xl"}>

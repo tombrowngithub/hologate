@@ -3,7 +3,7 @@ import {useTheme} from "next-themes";
 import {useContext, useEffect, useState} from "react";
 import {UserState} from "@/pages/StateContext";
 
-export default function ReadSetting({MyExit, MyExitSettings}) {
+export default function ReadSetting({MyExit, MyExitSettings, FontSizeDown, FontSizeUp, fontSizeCount}) {
     const {systemTheme, theme, setTheme} = useTheme();
     const [mounted, setMounted] = useState(false);
     const {account, setAccount, setLoginModal, isAuth} = useContext(UserState)
@@ -50,12 +50,14 @@ export default function ReadSetting({MyExit, MyExitSettings}) {
                 </div>
                 <hr/>
                 <div className="flex items-center justify-between mt-1 pl-1 mb-1">
-                    <p>Font size</p> <ChevronLeftIcon className="border border-zinc-600 w-7 p-0.6"/>
-                    <p>5</p>
-                    <ChevronRightIcon className="border border-zinc-600 w-7 p-0.6 mr-1"/>
+                    <p>Font size</p>
+                    <ChevronLeftIcon onClick={FontSizeDown} className="border border-zinc-600 w-7 p-0.6"/>
+                    <p>{fontSizeCount}</p>
+                    <ChevronRightIcon onClick={FontSizeUp} className="border border-zinc-600 w-7 p-0.6 mr-1"/>
                 </div>
             </div>
 
         </div>
     )
+
 }
