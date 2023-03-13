@@ -1,4 +1,4 @@
-import {ArrowLeftCircleIcon, ArrowRightCircleIcon} from '@heroicons/react/24/outline'
+import {ArrowLeftCircleIcon, ArrowRightCircleIcon, EyeIcon} from '@heroicons/react/24/outline'
 import {Fragment, useContext, useEffect, useState} from "react";
 import axios from "axios";
 import parse from 'html-react-parser'
@@ -70,7 +70,6 @@ export default function HomePage({query}) {
                         {
                             data.map((item, index) => (
                                 <Fragment key={index}>
-
                                     {loadingStates[index] ?
                                         <div className="my-card dark:bg-[#2d2d2d]">
                                             <div
@@ -81,14 +80,19 @@ export default function HomePage({query}) {
 
                                         :
                                         <div onClick={() => check(item._id, index)}
-                                             className="my-card dark:bg-zinc-300">
+                                             className="my-card dark:bg-zinc-300 cursor-pointer">
+
                                             <div onClick={() => check(item._id, index)}
-                                                 className="bg-slate-400 dark:bg-slate-800 cursor-pointer">
-                                                <h1 className="title  font-bold pt-0.5">{item.title}</h1>
+                                                 className="bg-slate-400 dark:bg-slate-800 ">
+                                                <h1 className="title font-bold pt-0.5">{item.title}</h1>
                                             </div>
 
                                             <div
-                                                className="dark:text-black text-start text-sm px-1">{parse(item.book_body)}
+                                                className="dark:text-black text-start text-sm px-1 subtitle">{parse(item.book_body)}
+                                            </div>
+
+                                            <div className="bg-slate-400 dark:bg-slate-800">
+                                                <p className="ml-0.5 text-xs flex items-center text-gray-300 flex-wrap"><span>Viewed</span><EyeIcon className="w-5 mr-0.5"/>235</p>
                                             </div>
 
                                         </div>
