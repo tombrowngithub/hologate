@@ -200,7 +200,7 @@ export default function Read({Books}) {
 }
 
 export async function getServerSideProps({params}) {
-    const res = await fetch(`http://hologate.netlify.app/api/${params.id}`);
+    const res = await fetch(`http://halogate.vercel.app/api/${params.id}`);
     if (res.status === 200) {
         const Books = await res.json();
         return {
